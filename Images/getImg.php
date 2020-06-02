@@ -27,7 +27,7 @@ $sql = "select * from image_tb where location_name='$place'";
 	while($row = mysqli_fetch_array($res)){
         
         $result['location_name'] = $row['location_name'];
-	       $result['url'] = $url.$row['image_name'];
+	$result['url'] = $url.$row['image_name'];
         $result['info'] = $row["info"]; 
     }
 echo json_encode($result);
