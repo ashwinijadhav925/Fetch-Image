@@ -34,7 +34,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private static final String IMAGES_URL = "http://192.168.1.103/Images/getImg.php";
+    private static final String IMAGES_URL = "http://192.168.43.249/Images/getImg.php";
 
     ImageView imageView;
     String placeinfo;
@@ -49,59 +49,10 @@ public class MainActivity extends AppCompatActivity  {
         placeinfo = getIntent().getStringExtra("place");
         System.out.println("....place name......"+placeinfo);
 
-        System.out.println(".me ithe ahe............");
         imageView=(ImageView)findViewById(R.id.imageView);
         getImage();
     }
 
-
-
-    /*private void getImg() {
-        class GetImg extends AsyncTask<String, Void, String> {
-            ProgressDialog loading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(MainActivity.this, "Fetching Data", "Please Wait...", true, true);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(MainActivity.this, "hiiii:"+s, Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            protected String doInBackground(String... params) {
-
-                String uri = params[0];
-                BufferedReader bufferedReader = null;
-                try {
-                    URL url = new URL(uri);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-
-                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                    String json;
-                    while ((json = bufferedReader.readLine()) != null) {
-                        sb.append(json + "\n");
-                    }
-
-                    return sb.toString().trim();
-
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }
-        GetImg gai = new GetImg();
-
-      gai.execute(IMAGES_URL);
-    }
-*/
     void getImage(){
         System.out.print("......inside getImage..........");
         JSONObject obj = new JSONObject();
@@ -130,14 +81,6 @@ public class MainActivity extends AppCompatActivity  {
                     // imageView.setImageBitmap(bitmap);
                     URL url = new URL(response.getString("url"));
 
-                    //         HttpURLConnection connection =(HttpURLConnection)url.openConnection();
-                    //           connection.setDoInput(true);
-                    //             connection.connect();
-//                    InputStream inputStream = connection.getInputStream();
-                    //bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    //bitmap=BitmapFactory.decodeStream()
-
-
                 } catch (Exception e) {
 
                     e.printStackTrace();
@@ -157,48 +100,6 @@ public class MainActivity extends AppCompatActivity  {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
 
-         /*stringRequest = new StringRequest(Request.Method.POST, IMAGES_URL,new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(MainActivity.this,"result:"+response,Toast.LENGTH_LONG).show();
-
-                Bitmap bitmap = null;
-                try {
-                    new DownLoadImageTask(imageView).execute(response);
-                    if(bitmap!=null){
-                        System.out.print("..............u r in bitmap..........");
-
-                    }
-                    else{
-                        System.out.print("....................sorry..............");
-                    }
-                   // imageView.setImageBitmap(bitmap);
-                    URL url = new URL(response);
-
-           //         HttpURLConnection connection =(HttpURLConnection)url.openConnection();
-         //           connection.setDoInput(true);
-       //             connection.connect();
-//                    InputStream inputStream = connection.getInputStream();
-                    //bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    //bitmap=BitmapFactory.decodeStream()
-
-
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-                }
-
-                //imageView.setImageBitmap();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this,error+"erere",Toast.LENGTH_LONG).show();
-            }
-        });
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);*/
-    }
 
     private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap>{
         ImageView imageView;
